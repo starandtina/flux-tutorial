@@ -1,0 +1,33 @@
+{
+  "name": "flux-tutorial",
+  "version": "0.0.1",
+  "description": "Learn how to use flux step by step",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/starandtina/flux-tutorial.git"
+  },
+  "scripts": {
+    "example": "babel-node"
+  },
+  "author": "Xin(Khalil) Zhang",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "css-loader": "^0.15.1",
+    "file-loader": "^0.8.4",
+    "node-libs-browser": "^0.5.2",
+    "react": "0.14.2",
+    "react-dom": "0.14.2",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.10.0",
+    "flux": "2.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "6.1.18",
+    "babel-eslint": "^3.1.9",
+    "eslint-plugin-react": "^2.3.0",
+    "react-hot-loader": "^1.2.7",
+    "webpack-dev-server": "^1.8.2"
+  }
+}
