@@ -8,7 +8,7 @@
 // How do I handle modification of such data?
 // How do I propagate modifications to all parts of my application?
 
-// Here comes Fulx.
+// Here comes Flux.
 
 // Flux (https://github.com/facebook/flux) is a "An application architecture for React utilizing a unidirectional data flow."
 
@@ -25,17 +25,19 @@
 // How do I handle data modifications?
 //     Using Stores.
 //     A store is a subscriber to actions.
-//     A store is just a function that receives the current state of your application, the action,
-//     and returns a new state modified (or reduced as they call it)
+//     A store receives the current state of your application, the action,
+//     and emit a "change" event to alert views that a change to the data layer has occurred. 
 // How do I propagate modifications to all parts of my application?
 //     Using subscribers to state's modifications. 
 //     It means propagating an action through a central dispatcher, to the various stores that hold the application's data and business logic.
 
 // Flux ties all this together for you.
-// To sum up, Fulx will provide you:
-//     1) a unidirectional data flow: Action Creators -> Action -> Dispatcher -> Store -> View (React Views) -> ... -> Action Creators
+// To sum up, Flux will provide you:
+//     1) a unidirectional data flow: Action Creators -> Action -> Dispatcher -> Store -> View (React/Backbone Views) -> ... -> Action Creators
 //     2) a mechanism to subscribe to state updates
 //     3) a mechanism to dispatch actions to modifiers of your application state
+
+// Also, Flux helps you avoiding **[event chains](http://www.code-experience.com/avoiding-event-chains-in-single-page-applications/)**
 
 // The Flux instance is called a dispatcher and can be created like this:
 /*
@@ -50,4 +52,4 @@ var dispatcher = new Dispatcher();
 
 // Seems good for now...
 
-// Go to next tutorial: dispatch-action.js
+// Go to next tutorial: simple-store.js

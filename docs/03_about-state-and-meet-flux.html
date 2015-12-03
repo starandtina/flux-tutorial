@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>03_about-state-and-meet-flux.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="00_introduction.html">
+                  00_introduction.js
+                </a>
+              
+                
+                <a class="source" href="01_simple-action-creator.html">
+                  01_simple-action-creator.js
+                </a>
+              
+                
+                <a class="source" href="02_simple-subscriber.html">
+                  02_simple-subscriber.js
+                </a>
+              
+                
+                <a class="source" href="03_about-state-and-meet-flux.html">
+                  03_about-state-and-meet-flux.js
+                </a>
+              
+                
+                <a class="source" href="04_simple_store.html">
+                  04_simple_store.js
+                </a>
+              
+                
+                <a class="source" href="05_dispatch-action.html">
+                  05_dispatch-action.js
+                </a>
+              
+                
+                <a class="source" href="Dispatcher.html">
+                  Dispatcher.js
+                </a>
+              
+                
+                <a class="source" href="ItemsStore.html">
+                  ItemsStore.js
+                </a>
+              
+                
+                <a class="source" href="UserStore.html">
+                  UserStore.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>03_about-state-and-meet-flux.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Tutorial 3 - about-state-and-meet-flux.js</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Sometimes the actions that we’ll handle in our application will not only inform us
+that something happened but also tell us that data needs to be updated.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>This is actually quite a big challenge in any app.
+Where do I keep all the data regarding my application along its lifetime?
+How do I handle modification of such data?
+How do I propagate modifications to all parts of my application?</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Here comes Flux.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Flux (<a href="https://github.com/facebook/flux">https://github.com/facebook/flux</a>) is a “An application architecture for React utilizing a unidirectional data flow.”</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Let’s review the above questions and reply to them with
+Flux vocabulary:</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Where do I keep all the data regarding my application along its lifetime?
+    To put it simply, application state is maintained only in the stores,
+    allowing the different parts of the application to remain highly decoupled.
+    You keep it the way you want (JS object, array, Backbone Model, Immutable structure, …).
+    Data of your application will be called state. This makes sense since we’re talking about
+    all the application’s data that will evolve over time, it’s really the application’s state.
+    But you hand it over to Flux.
+How do I handle data modifications?
+    Using Stores.
+    A store is a subscriber to actions.
+    A store receives the current state of your application, the action,
+    and emit a “change” event to alert views that a change to the data layer has occurred. 
+How do I propagate modifications to all parts of my application?
+    Using subscribers to state’s modifications. 
+    It means propagating an action through a central dispatcher, to the various stores that hold the application’s data and business logic.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Flux ties all this together for you.
+To sum up, Flux will provide you:
+    1) a unidirectional data flow: Action Creators -&gt; Action -&gt; Dispatcher -&gt; Store -&gt; View (React/Backbone Views) -&gt; … -&gt; Action Creators
+    2) a mechanism to subscribe to state updates
+    3) a mechanism to dispatch actions to modifiers of your application state</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Also, Flux helps you avoiding <strong><a href="http://www.code-experience.com/avoiding-event-chains-in-single-page-applications/">event chains</a></strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>The Flux instance is called a dispatcher and can be created like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*
+  import { Dispatcher } from 'flux';
+
+  var dispatcher = new Dispatcher();
+*/</span>
+
+<span class="hljs-keyword">import</span> { Dispatcher } <span class="hljs-keyword">from</span> <span class="hljs-string">'flux'</span>;
+
+<span class="hljs-keyword">var</span> dispatcher = <span class="hljs-keyword">new</span> Dispatcher();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Seems good for now…</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Go to next tutorial: simple-store.js</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

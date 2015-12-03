@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>00_introduction.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="00_introduction.html">
+                  00_introduction.js
+                </a>
+              
+                
+                <a class="source" href="01_simple-action-creator.html">
+                  01_simple-action-creator.js
+                </a>
+              
+                
+                <a class="source" href="02_simple-subscriber.html">
+                  02_simple-subscriber.js
+                </a>
+              
+                
+                <a class="source" href="03_about-state-and-meet-flux.html">
+                  03_about-state-and-meet-flux.js
+                </a>
+              
+                
+                <a class="source" href="04_simple_store.html">
+                  04_simple_store.js
+                </a>
+              
+                
+                <a class="source" href="05_dispatch-action.html">
+                  05_dispatch-action.js
+                </a>
+              
+                
+                <a class="source" href="Dispatcher.html">
+                  Dispatcher.js
+                </a>
+              
+                
+                <a class="source" href="ItemsStore.html">
+                  ItemsStore.js
+                </a>
+              
+                
+                <a class="source" href="UserStore.html">
+                  UserStore.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>00_introduction.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Tutorial 0 - introduction.js</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Why this tutorial?
+While trying to learn Flux, I realized that I had accumulated incorrect knowledge about flux through
+articles I read and personal experience. I don’t mean that articles about flux are not well written
+but I just didn’t grasp concepts correctly. In the end, I was just applying documentation of different
+flux frameworks (Reflux, Flummox, FB Flux) and trying to make them match with the theoretical concept I read
+about (actions / actions creators, store, dispatcher, etc).
+Only when I started using Redux did I realize that flux is more simple than I thought. This is all
+thanks to Redux being very well designed and having removed a lot of “anti-boilerplate features” introduced 
+by other frameworks I tried before. I now feel that Redux is a much better way to learn about flux
+than many other frameworks. 
+That’s why I want now to share with everyone, using my own words,
+flux concepts that I am starting to grasp, focusing on the use of Flux.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>You may have seen this diagram representing the famous unidirectional data flow of a flux application:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-comment">/*
+                 _________               ____________               ___________ 
+                |         |             |            |             |           |
+                | Action  |------------▶| Dispatcher |------------▶| callbacks |
+                |_________|             |____________|             |___________|
+                     ▲                                                   |
+                     |                                                   |
+                     |                                                   |
+ _________       ____|_____                                          ____▼____ 
+|         |◀----|  Action  |                                        |         |
+| Web API |     | Creators |                                        |  Store  |
+|_________|----▶|__________|                                        |_________|
+                     ▲                                                   |
+                     |                                                   |
+                 ____|________           ____________                ____▼____ 
+                |   User       |         |   React   |              | Change  |
+                | interactions |◀--------|   Views   |◀-------------| events  |
+                |______________|         |___________|              |_________|
+
+*/</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>In this tutorial we’ll gradually introduce you to concepts of the diagram above. But instead of trying
+to explain this complete diagram and the overall flow it describes, we’ll take each piece separately and try to
+understand why it exists and what role it plays. In the end you’ll see that this diagram makes perfect sense
+once we understand each of its parts.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>But before we start, let’s talk a little bit about why flux exists and why we need it…
+Let’s pretend we’re building a web application. What are all web applications made of?
+1) Templates / html = View
+2) Data that will populate our views = Models
+3) Logic to retrieve data, glue all views together and to react accordingly to user events,
+   data modifications, etc. = Controller</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>This is the very classic MVC that we all know about. But it actually looks like concepts of flux,
+just expressed in a slightly different way:</p>
+<ul>
+<li>Models look like stores</li>
+<li>user events, data modifications and their handlers look like
+“action creators” -&gt; action -&gt; dispatcher -&gt; callback</li>
+<li>Views look like React views (or anything else as far as flux is concerned)</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>So is flux just a matter of new vocabulary? Not exactly. But vocabulary DOES matter, because by introducing 
+these new terms we are now able to express more precisely things that were regrouped under 
+various terminologies… For example, isn’t a data fetch an action? Just like a click is also an action?
+And a change in an input is an action too… Then we’re all already used to issuing actions from our
+applications, we were just calling them differently. And instead of having handlers for those
+actions directly modify Models or Views, flux ensures all actions go first through something called
+a dispatcher, then through our stores, and finally all watchers of stores are notified.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>To get more clarity how MVC and flux differ, we’ll
+take a classic use-case in an MVC application:
+In a classic MVC application you could easily end up with:
+1) User clicks on button “A”
+2) A click handler on button “A” triggers a change on Model “A”
+3) A change handler on Model “A” triggers a change on Model “B”
+4) A change handler on Model “B” triggers a change on View “B” that re-renders itself</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Finding the source of a bug in such an environment when something goes wrong can become quite challenging
+very quickly. This is because every View can watch every Model, and every Model can watch other Models, so 
+basically data can arrive from a lot of places and be changed by a lot of sources (any views or any models).</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p> Whereas when using flux and its unidirectional data flow, the example above could become:
+1) user clicks on button “A”
+2) a handler on button “A” triggers an action that is dispatched and produces a change on Store “A”
+3) since all other stores are also notified about the action, Store B can react to the same action too
+4) View “B” gets notified by the change in Stores A and B, and re-renders</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>See how we avoid directly linking Store A to Store B? Each store can only be 
+modified by an action and nothing else. And once all stores have replied to an action, 
+views can finally update. So in the end, data always flows in one way: 
+    action -&gt; store -&gt; view -&gt; action -&gt; store -&gt; view -&gt; action -&gt; …</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Just as we started our use case above from an action, let’s start our tutorial with
+actions and action creators.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Go to next tutorial: simple-action-creator.js</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

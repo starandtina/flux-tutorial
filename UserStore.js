@@ -11,7 +11,7 @@ const UserStore =  assign({}, EventEmitter.prototype, {
    */
   getState: function() {
     return _user;
-  },
+  }
 });
 
 dispatcher.register(function (action) {
@@ -20,9 +20,10 @@ dispatcher.register(function (action) {
   switch (action.type) {
   case 'SET_NAME':
     _user.name = action.name;
-
-    default:
-      // no op
+    break
+  default:
+    // no op
+    break;
   }
 });
 

@@ -17,16 +17,16 @@ export default assign({}, EventEmitter.prototype, {
 dispatcher.register(function (action) {
   console.log('ItemsStore was called with args', arguments);
 
-   switch (action.type) {
-        case 'ADD_ITEM':
-            return [
+  switch (action.type) {
+  case 'ADD_ITEM':
+    return [
                 ...state,
                 action.item
             ]
-       
-    default:
-      // no op
-    }
+  default:
+    // no op
+    break;
+  }
 });
 
 
